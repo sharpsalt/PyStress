@@ -1,6 +1,6 @@
-# PyStress
+# cpstress
 
-A comprehensive stress testing data generator for competitive programming and algorithm testing with cryptographically secure randomness.
+A comprehensive stress testing data generator for competitive programming with cryptographically secure randomness.
 
 ## Features
 
@@ -12,22 +12,22 @@ A comprehensive stress testing data generator for competitive programming and al
 
 ## Installation
 
-### From PyPI (Coming Soon)
+### From PyPI
 ```bash
-pip install PyStress
+pip install cpstress
 ```
 
 ### From Source
 ```bash
-git clone https://github.com/yourusername/PyStress.git
-cd PyStress
+git clone https://github.com/sharpsalt/cpstress.git
+cd cpstress
 pip install -e .
 ```
 
 ## Quick Start
 
 ```python
-from PyStress.generators import gen_arrays, gen_numbers, gen_strings, gen_graphs
+from cpstress.generators import gen_arrays, gen_numbers, gen_strings, gen_graphs
 
 # Generate random array
 arr = gen_arrays.random(10, 1, 100)
@@ -87,6 +87,10 @@ print(tree)
 ## Security
 
 All random number generation uses Python's `secrets.SystemRandom()`, which provides cryptographically strong randomness that cannot be easily determined or predicted, unlike the standard `random.Random()` module.
+
+## License
+
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
 ## License
 
