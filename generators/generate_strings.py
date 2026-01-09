@@ -1,4 +1,8 @@
-import random
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from Hashings.secure_random import get_secure_random
 from enum import Enum
 from typing import List
 
@@ -12,7 +16,7 @@ class gen_strings:
     @staticmethod
     def random_char(case_type:CaseType,rng=None,l='a',r='z')->str:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if case_type==CaseType.Upper:
             base='A'
         else:
@@ -25,13 +29,13 @@ class gen_strings:
     @staticmethod
     def random(len_:int,case_type:CaseType,rng=None,l='a',r='z')->str:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return ''.join(gen_strings.random_char(case_type,rng,l,r) for _ in range(len_))
 
     @staticmethod
     def palindrome(len_:int,case_type:CaseType,rng=None,l='a',r='z')->str:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         s=['']*len_
         i,j=0,len_-1
         while i<=j:
@@ -44,7 +48,7 @@ class gen_strings:
     @staticmethod
     def random_alphanum(len_:int,letters:bool,digits:bool,case_type:CaseType,rng=None)->str:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         assert letters or digits
         s=[]
         for _ in range(len_):
@@ -62,20 +66,20 @@ class gen_strings:
     @staticmethod
     def random_custom(len_:int,alphabet:str,rng=None)->str:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         assert alphabet
         return ''.join(alphabet[rng.randint(0,len(alphabet)-1)] for _ in range(len_))
 
     @staticmethod
     def random_strings(count:int,len_:int,case_type:CaseType,rng=None)->List[str]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return [gen_strings.random(len_,case_type,rng) for _ in range(count)]
 
     @staticmethod
     def palindromes(count:int,len_:int,case_type:CaseType,rng=None)->List[str]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return [gen_strings.palindrome(len_,case_type,rng) for _ in range(count)]
 
 if __name__ == "__main__":
