@@ -1,4 +1,8 @@
-import random
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from Hashings.secure_random import get_secure_random
 from typing import List, Tuple
 
 class gen_graphs:
@@ -6,7 +10,7 @@ class gen_graphs:
     @staticmethod
     def tree(n: int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         nodes=list(range(1,n+1))
         rng.shuffle(nodes)
         edges=[]
@@ -22,7 +26,7 @@ class gen_graphs:
     @staticmethod
     def simple_graph(n: int,m: int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
 
         edges=gen_graphs.tree(n, rng)
         edge_set=set(tuple(sorted(e)) for e in edges)
@@ -37,7 +41,7 @@ class gen_graphs:
     @staticmethod
     def weighted_graph(n: int, m: int, min_w:int, max_w:int, zero_based=False,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
 
         edges=gen_graphs.simple_graph(n, m, zero_based, rng)
         return [(u,v,(rng.randint(min_w, max_w) if not zero_based else (rng.randint(min_w, max_w)))) for u,v in edges]
@@ -45,7 +49,7 @@ class gen_graphs:
     @staticmethod
     def directed_graph(n: int,m: int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         edge_set=set()
         while len(edge_set)<m:
             u=rng.randint(1,n)
@@ -57,7 +61,7 @@ class gen_graphs:
     @staticmethod
     def dag(n: int,m: int,zero_based=False,rng=None)->List[Tuple[int, int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
 
         nodes=list(range(1,n+1))
         rng.shuffle(nodes)
@@ -72,7 +76,7 @@ class gen_graphs:
     @staticmethod
     def bipartite(n1: int,n2: int,m: int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         edge_set=set()
         while len(edge_set)<m:
             u=rng.randint(1,n1)
@@ -83,7 +87,7 @@ class gen_graphs:
     @staticmethod
     def star(n:int,center:int=1,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         edges=[]
         for i in range(1,n+1):
             if i!=center:
@@ -94,7 +98,7 @@ class gen_graphs:
     @staticmethod
     def cycle(n:int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         nodes=list(range(1,n+1))
         rng.shuffle(nodes)
         if zero_based:
@@ -110,7 +114,7 @@ class gen_graphs:
     @staticmethod
     def regular(n:int,d:int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if (n*d)%2!=0 or d>=n:
             return []
         nodes=[]
@@ -128,7 +132,7 @@ class gen_graphs:
     @staticmethod
     def tree_with_diameter(n:int,diameter:int,zero_based=False,rng=None)->List[Tuple[int,int]]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         diameter=min(diameter,n-1)
         path=list(range(1,diameter+2))
         rng.shuffle(path)
