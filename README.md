@@ -2,6 +2,19 @@
 
 A comprehensive stress testing data generator for competitive programming with cryptographically secure randomness.
 
+## Version History
+
+### v0.2.0 - Bug Fixes & Improvements
+-  Fixed edge cases in graph generation (weighted graph parameter handling)
+-  Improved performance for large-scale random generation
+-  Enhanced documentation and examples
+-  Fixed import paths and module organization
+-  Added better error handling for invalid parameters
+-  Optimized random number generation for cryptographic security
+
+### v0.1.0 - Initial Release
+- Initial stable release with core functionality
+
 ## Features
 
 - **Arrays**: Random arrays, permutations, matrices, pairs, subsets, partitions, and specialized patterns (strictly increasing/decreasing, arithmetic/geometric progressions)
@@ -87,10 +100,6 @@ print(tree)
 ## Security
 
 All random number generation uses Python's `secrets.SystemRandom()`, which provides cryptographically strong randomness that cannot be easily determined or predicted, unlike the standard `random.Random()` module.
-
-## License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
 
 ## License
 
