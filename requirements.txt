@@ -1,2 +1,2 @@
 # No external dependencies required
-# PyStress only uses Python standard library (secrets, random, typing, enum)
+# cpstress only uses Python standard library (secrets, random, typing, enum)
