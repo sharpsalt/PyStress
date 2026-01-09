@@ -1,11 +1,15 @@
-import random
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from Hashings.secure_random import get_secure_random
 
 class gen_arrays:
     
     @staticmethod
     def random(len_: int,l: int,r: int,rng=None,unique: bool=False,sorted_: bool=False):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if unique:
             if len_>r-l+1:
                 raise ValueError("Cannot generate unique values: not enough numbers in range")
@@ -22,7 +26,7 @@ class gen_arrays:
     @staticmethod
     def permutation(n: int,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=list(range(1,n+1))
         rng.shuffle(v)
         return v
@@ -30,13 +34,13 @@ class gen_arrays:
     @staticmethod
     def matrix(rows: int,cols: int,l: int,r: int,rng=None,unique_rows: bool=False,sorted_rows: bool=False):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return [gen_arrays.random(cols,l,r,rng,unique=unique_rows,sorted_=sorted_rows) for _ in range(rows)]
 
     @staticmethod
     def pairs(len_: int,l1: int,r1: int,l2: int,r2: int,rng=None,ordered: bool=False):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=[]
         for _ in range(len_):
             a=rng.randint(l1,r1)
@@ -49,7 +53,7 @@ class gen_arrays:
     @staticmethod
     def subset(l: int,r: int,k: int,rng=None,sorted_: bool=False):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if k>r-l+1:
             raise ValueError("Subset size larger than range")
         v=set()
@@ -65,7 +69,7 @@ class gen_arrays:
     @staticmethod
     def partition(sum_: int,k: int,min_val: int,max_val: int,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if sum_<min_val*k or sum_>max_val*k:
             raise ValueError("Sum out of possible range")
         parts=[min_val]*k
@@ -102,13 +106,13 @@ class gen_arrays:
     @staticmethod
     def bit_array(len_: int,prob_one: float=0.5,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return [1 if rng.random()<prob_one else 0 for _ in range(len_)]
 
     @staticmethod
     def shuffled(v,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=v[:]
         rng.shuffle(v)
         return v
@@ -116,7 +120,7 @@ class gen_arrays:
     @staticmethod
     def strictly_increasing(len_: int,start: int,step_min: int,step_max: int,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=[start]
         cur=start
         for _ in range(1,len_):
@@ -127,7 +131,7 @@ class gen_arrays:
     @staticmethod
     def strictly_decreasing(len_: int,start: int,step_min: int,step_max: int,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=[start]
         cur=start
         for _ in range(1,len_):
@@ -138,7 +142,7 @@ class gen_arrays:
     @staticmethod
     def random_with_sum(len_: int,sum_: int,min_val: int,max_val: int,rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if sum_<min_val*len_ or sum_>max_val*len_:
             raise ValueError("Sum out of possible range")
         v=[min_val]*len_
