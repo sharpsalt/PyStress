@@ -1,6 +1,6 @@
 # cpstress
 
-A comprehensive stress testing data generator for competitive programming with cryptographically secure randomness.
+A comprehensive stress testing data generator with cryptographically secure randomness.
 
 ## Version History
 
