@@ -1,4 +1,8 @@
-import random
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from Hashings.secure_random import get_secure_random
 from typing import List,Set
 
 class gen_numbers:
@@ -6,19 +10,19 @@ class gen_numbers:
     @staticmethod
     def random_int(l:int,r:int,rng=None)->int:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return rng.randint(l,r)
 
     @staticmethod
     def random_real(l:float,r:float,rng=None)->float:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return rng.uniform(l,r)
 
     @staticmethod
     def random_range(l,r,count:int,rng=None)->List:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         if isinstance(l,float) or isinstance(r,float):
             return [rng.uniform(l,r) for _ in range(count)]
         return [rng.randint(l,r) for _ in range(count)]
@@ -26,7 +30,7 @@ class gen_numbers:
     @staticmethod
     def random_exclude(l:int,r:int,exclude:Set[int],rng=None)->int:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         while True:
             val=rng.randint(l,r)
             if val not in exclude:
@@ -35,7 +39,7 @@ class gen_numbers:
     @staticmethod
     def random_range_exclude(l:int,r:int,count:int,exclude:Set[int],rng=None)->List[int]:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         v=[]
         while len(v)<count:
             val=rng.randint(l,r)
@@ -46,13 +50,13 @@ class gen_numbers:
     @staticmethod
     def random_weighted(values:List,weights:List[float],rng=None):
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         return rng.choices(values,weights,k=1)[0]
 
     @staticmethod
     def random_real_exclude(l:float,r:float,excl_l:float,excl_r:float,rng=None)->float:
         if rng is None:
-            rng=random.Random()
+            rng=get_secure_random()
         while True:
             val=rng.uniform(l,r)
             if not(excl_l<=val<=excl_r):
